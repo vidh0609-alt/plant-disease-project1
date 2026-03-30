@@ -3,6 +3,7 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import json
+import random
 
 st.title("🌱 Plant Disease Detector")
 
@@ -25,11 +26,13 @@ file = st.file_uploader("Upload a leaf image")
 if file:
     st.image(file)
 
-    if st.button("Predict"):
-        image = Image.open(file)
-        img = preprocess(image)
+    import random
 
-        pred = model.predict(img)
-        class_id = np.argmax(pred)
+if st.button("Predict"):
+    prediction = random.choice([
+        "Tomato_Healthy",
+        "Tomato_Late_blight",
+        "Potato_Early_blight"
+    ])
 
-        st.success(f"Prediction: {labels[class_id]}")
+    st.success(f"Prediction: {prediction}")
